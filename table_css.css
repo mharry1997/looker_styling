@@ -1,0 +1,129 @@
+ #visContainer {
+    left: 0px !important;
+    right: 0px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+  
+  .reportTable {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.53846 !important;
+    color: #262D33;
+    border-spacing: 3px;
+    border-collapse: collapse;
+    position: relative;
+    text-align: left !important;
+    padding-right: 0.7em;
+  }
+
+  .reportTable td {
+    border-right: 1px solid rgb(220,220,220);
+  }
+
+  .reportTable th {
+    border-bottom: 1px solid rgb(220,220,220);
+  }
+
+  th.reportTable:not(:first-child) {
+    padding-left: 0.7em;
+  }
+
+  td.reportTable:not(:first-child) {
+    padding-left: 0.7em;
+  }
+
+  .reportTable th:before {
+    content: '';
+    position: absolute;
+    top: 25%; 
+    right: 0; 
+    width: 1px; 
+    height: 50%;
+    background-color: rgb(220,220,220);
+  }
+
+  .reportTable tr:not(:first-of-type) th {
+    border-top: 1px solid rgb(220,220,220);
+    border-bottom: 1px solid rgb(220,220,220);
+  }
+
+  td.reportTable:last-child {
+    border-right: none;
+    
+  }
+
+  .reportTable tbody tr:not(:first-child):nth-child(even) {
+    background-color: #f0f1f1;
+  }
+   
+  element.style {
+    left: 129.641px;
+    top: 148px;
+}
+
+#tooltip {
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    border-right: none !important;
+    background-color: white;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    font-family: sans-serif;
+    font-size: 12px;
+    z-index: 2;
+}
+
+#tooltip.hidden {
+    display: none;
+}
+
+#tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 15px;
+    border-right: none !important;
+}
+
+.hover {
+    background-color: rgb(230,230,230) !important;
+    z-index: 100;
+}
+
+.subtotal {
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .total {
+    border-top: 1px solid rgb(220,220,220) !important;
+    font-weight: bold !important;
+    border-bottom: 2px solid rgb(220,220,220) !important;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .total.transposed {
+    border-top: 0px !important;
+    background-color: rgb(255, 255, 255);
+    background: #D3D3D3;
+  }
+  
+  .reportTable .variance, .reportTable .variancePercent {
+      color: #037A44 !important;
+  }
+  
+  .reportTable .variance.negative, .reportTable .variancePercent.negative {
+      color: #E33D2D !important;
+  }
+  
+  
+
