@@ -1,0 +1,95 @@
+looker.plugins.visualizations.add({
+  // Id and Label are legacy properties that no longer have any function besides documenting
+  // what the visualization used to have. The properties are now set via the manifest
+  // form within the admin/visualizations page of Looker
+  id: "hello_world",
+  label: "Hello World",
+  options: {
+    font_size: {
+      type: "string",
+      label: "Font Size",
+      values: [
+        {"Large": "large"},
+        {"Small": "small"}
+      ],
+      display: "radio",
+      default: "large"
+    }
+  },
+  // Set up the initial state of the visualization
+  create: function(element, config) {
+
+    // Insert a <style> tag with some styles we'll use later.
+    element.innerHTML = `
+      <style>
+        .hello-world-vis {
+          /* Vertical centering */
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align: center;
+        }
+        .hello-world-text-large {
+          font-size: 72px;
+        }
+        .hello-world-text-small {
+          font-size: 18px;
+        }
+        .number-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust the width of each column as needed */
+          gap: 20px; /* Spacing between numbers */
+        }
+        .number {
+          font-size: 72px;
+        }
+      </style>
+    `;
+    
+    // Create a container element to let us center the numbers.
+    var container = element.appendChild(document.createElement("div"));
+    container.className = "hello-world-vis";
+    
+    // Create an element to contain the numbers.
+    this._numberContainer = container.appendChild(document.createElement("div"));
+    this._numberContainer.className = "number-container";
+
+  },
+    // Render in response to the data or settings changing
+    updateAsync: function(data, element, config, queryResponse, details, done) {
+
+    // Clear any errors from previous updates
+    this.clearErrors();
+  
+    // Check if there are at least five rows of data
+    if (data.length > 5) {
+      this.addError({title: "Too many values", message: "This chart shows 5 values at most."});
+      return;
+    }
+  
+    // Initialize an array to store the numbers
+    var numbers = [];
+  
+    // Extract the numbers from the first five rows of data
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      var cell = row[queryResponse.fields.dimensions[0].name];
+      numbers.push(LookerCharts.Utils.htmlForCell(cell));
+    }
+  
+    // Insert the numbers into the page
+    this._numberContainer.innerHTML = numbers.join("");
+  
+    // Set the size to the user-selected size
+    if (config.font_size == "small") {
+      this._numberContainer.className = "hello-world-text-small";
+    } else {
+      this._numberContainer.className = "hello-world-text-large";
+    }
+  
+    // We are done rendering! Let Looker know.
+    done();
+  }
+});
+
